@@ -18,7 +18,7 @@ How to use ADRMine?
 The current version of ADRMine includes the trained models for  ADR extraction. It is a jar file (adrmine_deploy.jar) that gets the test sentences as input and automatically tags the ADR mentions in the given sentences and generates a text file with ADR tags. 
 
 Usage example:
-java -jar adrmine_deploy.jar /tmp/test_sentences.tsv    twitter1 ADRMinedb root password  /home/azadeh/software-packages/crfsuite-0.12-2/bin/crfsuite
+java -jar adrmine_deploy.jar /tmp/test_sentences.tsv    twitter1 ADRMineDB root password  /home/azadeh/software-packages/crfsuite-0.12-2/bin/crfsuite
 
 Parameters:
 1 ) test file (e.g. /tmp/test_sentences.tsv)
