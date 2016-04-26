@@ -5,10 +5,10 @@ Requirements
 
 ADRMine uses MYSQL database, please install MYSQL if you don't have on your machine.
 
-1)First create a mysql database, e.g. ADRMineDB:
+1) First create a mysql database, e.g. ADRMineDB:
            CREATE DATABASE `ADRMineDB`;
 
-2)Restore the provided schema:
+2) Restore the provided schema:
 
 mysql --user=[MYSQL_user] --password=[your_MYSQL_password]  ADRMineDB< adrmine-db-schema-nodata.sql
 
