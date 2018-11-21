@@ -1,0 +1,33 @@
+## tagger training invoked at Sat Apr 16 09:36:17 PDT 2011 with arguments:
+                   model = arabic-accurate.tagger
+                    arch = words(-2,2),order(2),wordTag(0,-1),prefix(6),suffix(6),unicodeshapes(1)
+               trainFile = format=TREES,../data/pos-tagger/training/arabic/new/2-Unvoc-Train.utf8.txt;format=TREES,../data/pos-tagger/training/arabic/new/2-Unvoc-Dev.utf8.txt;format=TREES,../data/pos-tagger/training/arabic/new/2-Unvoc-Test.utf8.txt
+         closedClassTags = 
+ closedClassTagThreshold = 40
+ curWordMinFeatureThresh = 1
+                   debug = false
+             debugPrefix = 
+            tagSeparator = /
+                encoding = UTF-8
+              iterations = 100
+                    lang = arabic
+    learnClosedClassTags = false
+        minFeatureThresh = 3
+           openClassTags = 
+rareWordMinFeatureThresh = 3
+          rareWordThresh = 5
+                  search = qn
+                    sgml = false
+            sigmaSquared = 0.5
+                   regL1 = 1.0
+               tagInside = 
+                tokenize = false
+        tokenizerFactory = edu.stanford.nlp.process.WhitespaceTokenizer
+        tokenizerOptions = 
+                 verbose = false
+          verboseResults = true
+    veryCommonWordThresh = 250
+                xmlInput = 
+              outputFile = 
+            outputFormat = slashTags
+     outputFormatOptions = 

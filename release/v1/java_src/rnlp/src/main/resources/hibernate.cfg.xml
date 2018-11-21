@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ Copyright (c) 2010, Red Hat Inc. or third-party contributors as
+  ~ indicated by the @author tags or express copyright attribution
+  ~ statements applied by the authors.  All third-party contributions are
+  ~ distributed under license by Red Hat Inc.
+  ~
+  ~ This copyrighted material is made available to anyone wishing to use, modify,
+  ~ copy, or redistribute it subject to the terms and conditions of the GNU
+  ~ Lesser General Public License, as published by the Free Software Foundation.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+  ~ for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with this distribution; if not, write to:
+  ~ Free Software Foundation, Inc.
+  ~ 51 Franklin Street, Fifth Floor
+  ~ Boston, MA  02110-1301  USA
+  -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+<!--         <property name="connection.url">jdbc:mysql://localhost/adrmine</property> -->
+<!--  		<property name="connection.url">jdbc:mysql://localhost/deext</property> -->
+        <property name="connection.url">jdbc:mysql://localhost/deextTwitter</property>
+<!--         <property name="connection.url">jdbc:mysql://localhost/off-label-deext</property> -->
+<!--          <property name="connection.url">jdbc:mysql://localhost/off-label-deext-seroquel</property> -->
+<!--          <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment</property> -->
+<!--           <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment-twitter</property> -->
+<!--                    <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment-TwitterMain</property> -->
+          
+<!--         <property name="connection.url">jdbc:mysql://localhost/offLabelCrossCorpus</property> -->
+<!-- 		<property name="connection.url">jdbc:mysql://localhost/healthRelated</property>  -->
+<!-- 		<property name="connection.url">jdbc:mysql://localhost/offLabelDSSeroquel</property> -->
+<!-- 		 <property name="connection.url">jdbc:mysql://localhost/offLabelDSEffexor</property> -->
+<!-- 					   <property name="connection.url">jdbc:mysql://localhost/offLabelDSCymbalta</property> -->
+<!-- 			   <property name="connection.url">jdbc:mysql://localhost/offLabelDSTrazodone</property> -->
+<!--  			<property name="connection.url">jdbc:mysql://localhost/deextTwitterRNNExperiments</property> -->
+<!-- 				<property name="connection.url">jdbc:mysql://localhost/deextLessTrainDataSignSymp</property> -->
+<!--       <property name="connection.url">jdbc:mysql://localhost/deextTwitterHumira</property>  -->
+<!-- <property name="connection.url">jdbc:mysql://localhost/PSB-Twitter</property> -->
+<!-- <property name="connection.url">jdbc:mysql://localhost/DrSmithPaperAug2016</property>  -->
+<!-- <property name="connection.url">jdbc:mysql://localhost/ADRMineDB</property> -->
+<!--               <property name="connection.url">jdbc:mysql://localhost/ADRMineAllTweets</property> -->
+
+        <property name="connection.username">user</property>
+        <property name="connection.password">pass</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">100</property>
+
+        <!-- SQL dialect -->
+<!--         <property name="dialect">org.hibernate.dialect.H2Dialect</property> -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.EHCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+<!--         <property name="generate_statistics">true</property> -->
+		<property name="use_sql_comments">true</property> 
+
+        <!-- Drop and re-create the database schema on startup -->
+<!-- 	   <property name="hbm2ddl.auto">create</property> -->
+
+        <!-- Names the annotated entity class -->
+        <mapping class="rainbownlp.core.Artifact"/>
+		<mapping class="rainbownlp.core.PhraseLink"/>
+		<mapping class="rainbownlp.core.Phrase"/>
+		<mapping class="rainbownlp.core.SentenceChunk"/>
+		
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.ClinicalEvent"/> -->
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.TimexPhrase"/> -->
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.SecTime"/> -->
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.SentencePattern"/> -->
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.analyzer.NormalizedSentence"/> -->
+<!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.patternminer.GeneralizedSentence"/> -->
+		
+		<mapping class="rainbownlp.machineLearning.MLExampleFeature"/>
+		<mapping class="rainbownlp.machineLearning.MLExample"/>
+		<mapping class="rainbownlp.core.FeatureValuePair"/>
+
+    </session-factory>
+
+</hibernate-configuration>

@@ -1,0 +1,38 @@
+# ~/gitroot/base_workspace/my-project/BUILD
+java_binary(
+    name = "adrmine",
+    srcs = glob(["**/*.java","**/*.properties"]),
+    deps = ["//rnlp-stb:rnlp", "//rnlp-stb:rnlp_jars", "adrmine_jars"],
+    main_class = "edu.asu.diego.extraction.mainADRMinePipelineForExtraction",
+    resources = [
+        "src/resources/DSOct314-classes-sorted.txt",
+        "src/resources/TwitterOct0514-classes-sorted.txt",
+        "src/resources/crfsuiteModels/generalHealthRelated/crfsuite.model",
+        "src/resources/crfsuiteModels/twitter/crfsuiteTwitter.model",
+        "src/resources/ADRTokenizedLexiconLuneceIndex",
+        "src/resources/ADRTokenizedLexiconLuneceIndex/_0.fdt",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.fdx",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.fnm",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.frq",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.nrm",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.prx",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.tii",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.tis",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.tvd",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.tvf",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/_0.tvx",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/segments_1",
+	"src/resources/ADRTokenizedLexiconLuneceIndex/segments.gen",
+     ],
+     data = glob(["src/resources/ADRTokenizedLexiconLuneceIndex/**"])
+
+)
+
+java_import(
+        name = "adrmine_jars",
+        jars = [
+            "libs/lucene-core-3.6.2.jar",
+            "libs/lucene-spellchecker-3.6.1.jar",
+            "libs/commons-io-2.5.jar",
+            ],
+    )

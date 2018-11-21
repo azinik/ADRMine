@@ -1,0 +1,413 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0xb77bcabd, pid=14835, tid=1913064304
+#
+# JRE version: 6.0_26-b03
+# Java VM: Java HotSpot(TM) Server VM (20.1-b02 mixed mode linux-x86 )
+# Problematic frame:
+# C  [libpthread.so.0+0xaabd]  pthread_cond_signal+0xd
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x08a0d000):  JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=14851, stack(0x72020000,0x72071000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x398b2f2f
+
+Registers:
+EAX=0x00000000, EBX=0xb77c7ff4, ECX=0x0000004d, EDX=0x00000001
+ESP=0x7206fc38, EBP=0x7206fc58, ESI=0x398b2f2f, EDI=0x398b2f2f
+EIP=0xb77bcabd, EFLAGS=0x00210246, CR2=0x398b2f2f
+
+Top of Stack: (sp=0x7206fc38)
+0x7206fc38:   716eda40 b77c7ff4 b77bceab 398b2f2f
+0x7206fc48:   ffffffff b721fdc8 00000000 716eda28
+0x7206fc58:   7206fc88 b7000361 716eda40 716f42a8
+0x7206fc68:   7206fca8 b6fd85a0 716f42a8 b7215734
+0x7206fc78:   00000001 b721fdc8 716f42a8 00000001
+0x7206fc88:   7206fcb8 b6fd8718 716eda00 08a0db78
+0x7206fc98:   7206fcc8 b6fd860e b7215734 00000001
+0x7206fca8:   716f42b4 b721fdc8 716f1400 00000005 
+
+Instructions: (pc=0xb77bcabd)
+0xb77bca9d:   00 89 34 24 e8 fa 47 00 00 f4 90 90 90 90 90 90
+0xb77bcaad:   90 90 90 53 57 8b 7c 24 0c ba 01 00 00 00 31 c0
+0xb77bcabd:   f0 0f b1 17 0f 85 cb 00 00 00 8d 5f 04 8b 47 0c
+0xb77bcacd:   8b 4f 08 3b 47 14 77 0f 0f 82 98 00 00 00 3b 4b 
+
+Register to memory mapping:
+
+EAX=0x00000000 is an unknown value
+EBX=0xb77c7ff4: <offset 0x15ff4> in /lib/i386-linux-gnu/libpthread.so.0 at 0xb77b2000
+ECX=0x0000004d is an unknown value
+EDX=0x00000001 is an unknown value
+ESP=0x7206fc38 is pointing into the stack for thread: 0x08a0d000
+EBP=0x7206fc58 is pointing into the stack for thread: 0x08a0d000
+ESI=0x398b2f2f is an unknown value
+EDI=0x398b2f2f is an unknown value
+
+
+Stack: [0x72020000,0x72071000],  sp=0x7206fc38,  free space=319k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libpthread.so.0+0xaabd]  pthread_cond_signal+0xd
+V  [libjvm.so+0x5e2361]  os::PlatformEvent::unpark()+0xc1
+V  [libjvm.so+0x5ba718]  Monitor::IUnlock(bool)+0x118
+V  [libjvm.so+0x5bae3a]  Monitor::unlock()+0x3a
+V  [libjvm.so+0x4dc872]  JvmtiEnv::GetThreadState(_jobject*, int*)+0x122
+V  [libjvm.so+0x469a49]  unsigned+0xf9
+C  [libjdwp.so+0x23229]  unsigned short+0x49
+C  [libjdwp.so+0x26eae]  unsigned short+0x5e
+C  [libjdwp.so+0xa6d7]  short+0x87
+C  [libjdwp.so+0x13143]  double+0x233
+C  [libjdwp.so+0x27fd5]  char+0x75
+C  [libjdwp.so+0x282d3]  signed char+0x33
+V  [libjvm.so+0x4f8829]  JvmtiAgentThread::start_function_wrapper(JavaThread*, Thread*)+0x79
+V  [libjvm.so+0x6e16bf]  JavaThread::run()+0x11f
+V  [libjvm.so+0x5e2aee]  java_start(Thread*)+0x14e
+C  [libpthread.so.0+0x5e99]  short+0xd9
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x716e9800 JavaThread "DestroyJavaVM" [_thread_blocked, id=14840, stack(0xb69a7000,0xb69f8000)]
+  0x71d00c00 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=14860, stack(0x71e2b000,0x71e7c000)]
+  0x08a1c800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=14859, stack(0x71e7c000,0x71efd000)]
+  0x08a1ac00 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=14858, stack(0x71efd000,0x71f7e000)]
+  0x08a11400 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=14855, stack(0x71f7e000,0x71fcf000)]
+  0x08a0f800 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=14854, stack(0x71fcf000,0x72020000)]
+=>0x08a0d000 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=14851, stack(0x72020000,0x72071000)]
+  0x08a04800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=14849, stack(0x72071000,0x720c2000)]
+  0x089f3c00 JavaThread "Finalizer" daemon [_thread_blocked, id=14848, stack(0x720c2000,0x72113000)]
+  0x089f2400 JavaThread "Reference Handler" daemon [_thread_blocked, id=14847, stack(0x72113000,0x72164000)]
+
+Other Threads:
+  0x089ee800 VMThread [stack: 0x72164000,0x721e5000] [id=14846]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 17792K, used 8603K [0x9f180000, 0xa0940000, 0xb3620000)
+  eden space 15232K, 39% used [0x9f180000,0x9f7689a0,0xa0060000)
+  from space 2560K, 99% used [0xa00c0000,0xa033e590,0xa0340000)
+  to   space 4544K, 0% used [0xa04d0000,0xa04d0000,0xa0940000)
+ PSOldGen        total 41600K, used 1643K [0x76820000, 0x790c0000, 0x9f180000)
+  object space 41600K, 3% used [0x76820000,0x769bac18,0x790c0000)
+ PSPermGen       total 16384K, used 15930K [0x72820000, 0x73820000, 0x76820000)
+  object space 16384K, 97% used [0x72820000,0x737aeaf0,0x73820000)
+
+Code Cache  [0xb36e3000, 0xb3923000, 0xb66e3000)
+ total_blobs=479 nmethods=346 adapters=95 free_code_cache=49412864 largest_free_block=12736
+
+Dynamic libraries:
+08048000-08052000 r-xp 00000000 08:05 4327946    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/bin/java
+08052000-08053000 rwxp 00009000 08:05 4327946    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/bin/java
+0896a000-08e8a000 rwxp 00000000 00:00 0          [heap]
+71600000-71747000 rwxp 00000000 00:00 0 
+71747000-71800000 ---p 00000000 00:00 0 
+71800000-718ff000 rwxp 00000000 00:00 0 
+718ff000-71900000 ---p 00000000 00:00 0 
+719af000-719b2000 ---p 00000000 00:00 0 
+719b2000-71a00000 rwxp 00000000 00:00 0 
+71a00000-71afa000 rwxp 00000000 00:00 0 
+71afa000-71b00000 ---p 00000000 00:00 0 
+71b46000-71b5a000 r-xp 00000000 08:05 5770250    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libnet.so
+71b5a000-71b5b000 rwxp 00013000 08:05 5770250    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libnet.so
+71b5b000-71b63000 r-xs 00115000 08:05 3939744    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/resources.jar
+71b63000-71b7d000 r-xs 0019f000 08:05 4207403    /home/azadeh/projects/used libraries/stanford-postagger-full-2012-05-22/stanford-postagger.jar
+71b7d000-71b7f000 r-xs 00005000 08:05 4074966    /home/azadeh/Downloads/eclipse/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar
+71b7f000-71b85000 r-xs 00030000 08:05 4328338    /home/azadeh/Downloads/eclipse/plugins/org.junit_4.8.1.v4_8_1_v20100427-1100/junit.jar
+71b85000-71b93000 r-xs 000ce000 08:05 7343489    /home/azadeh/projects/rainbowNLP/libs/annas-20-07-11.jar
+71b93000-71b95000 r-xs 0000d000 08:05 7343531    /home/azadeh/projects/rainbowNLP/libs/jboss-logging-3.1.0.GA.jar
+71b95000-71b9e000 r-xs 00096000 08:05 7343526    /home/azadeh/projects/rainbowNLP/libs/javassist-3.15.0-GA.jar
+71b9e000-71ba3000 r-xs 00015000 08:05 7343537    /home/azadeh/projects/rainbowNLP/libs/hibernate-jpa-2.0-api-1.0.1.Final.jar
+71ba3000-71ba6000 r-xs 00011000 08:05 7343535    /home/azadeh/projects/rainbowNLP/libs/hibernate-commons-annotations-4.0.1.Final.jar
+71ba6000-71bab000 r-xs 00048000 08:05 7343527    /home/azadeh/projects/rainbowNLP/libs/dom4j-1.6.1.jar
+71bab000-71bb0000 r-xs 00068000 08:05 7343533    /home/azadeh/projects/rainbowNLP/libs/antlr-2.7.7.jar
+71bb0000-71bfd000 r-xs 003e8000 08:05 7343529    /home/azadeh/projects/rainbowNLP/libs/hibernate-core-4.1.3.Final.jar
+71bfd000-71c09000 r-xs 000c0000 08:05 7343521    /home/azadeh/projects/rainbowNLP/libs/dragontool.jar
+71c09000-71c45000 r-xs 005a0000 08:05 7343532    /home/azadeh/projects/rainbowNLP/libs/weka.jar
+71c45000-71c5c000 r-xs 00153000 08:05 7343522    /home/azadeh/projects/rainbowNLP/libs/stanford-postagger.jar
+71c5c000-71c7f000 r-xs 00234000 08:05 7343539    /home/azadeh/projects/rainbowNLP/libs/stanford-parser.jar
+71c7f000-71c80000 ---p 00000000 00:00 0 
+71c80000-71d00000 rwxp 00000000 00:00 0 
+71d00000-71dfd000 rwxp 00000000 00:00 0 
+71dfd000-71e00000 ---p 00000000 00:00 0 
+71e00000-71e01000 r-xp 00000000 00:00 0 
+71e01000-71e03000 r-xs 02e31000 08:05 7343588    /home/azadeh/projects/rainbowNLP/libs/stanford-parser-2012-05-22-models.jar
+71e03000-71e04000 r-xs 00003000 08:05 7343551    /home/azadeh/projects/rainbowNLP/libs/stringtotime-1.0.4.jar
+71e04000-71e05000 r-xs 00001000 08:05 7343525    /home/azadeh/projects/rainbowNLP/libs/slf4j-simple-1.6.4.jar
+71e05000-71e07000 r-xs 00005000 08:05 7343536    /home/azadeh/projects/rainbowNLP/libs/slf4j-api-1.6.4.jar
+71e07000-71e0e000 r-xs 000b7000 08:05 7343520    /home/azadeh/projects/rainbowNLP/libs/mysql-connector-java-5.1.14-bin.jar
+71e0e000-71e2b000 r-xs 001ec000 08:05 7343528    /home/azadeh/projects/rainbowNLP/libs/mallet.jar
+71e2b000-71e2e000 ---p 00000000 00:00 0 
+71e2e000-71e7c000 rwxp 00000000 00:00 0 
+71e7c000-71e7f000 ---p 00000000 00:00 0 
+71e7f000-71efd000 rwxp 00000000 00:00 0 
+71efd000-71f00000 ---p 00000000 00:00 0 
+71f00000-71f7e000 rwxp 00000000 00:00 0 
+71f7e000-71f81000 ---p 00000000 00:00 0 
+71f81000-71fcf000 rwxp 00000000 00:00 0 
+71fcf000-71fd2000 ---p 00000000 00:00 0 
+71fd2000-72020000 rwxp 00000000 00:00 0 
+72020000-72023000 ---p 00000000 00:00 0 
+72023000-72071000 rwxp 00000000 00:00 0 
+72071000-72074000 ---p 00000000 00:00 0 
+72074000-720c2000 rwxp 00000000 00:00 0 
+720c2000-720c5000 ---p 00000000 00:00 0 
+720c5000-72113000 rwxp 00000000 00:00 0 
+72113000-72116000 ---p 00000000 00:00 0 
+72116000-72164000 rwxp 00000000 00:00 0 
+72164000-72165000 ---p 00000000 00:00 0 
+72165000-72219000 rwxp 00000000 00:00 0 
+72219000-723b1000 r-xs 03029000 08:05 3939730    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/rt.jar
+723b1000-723b2000 ---p 00000000 00:00 0 
+723b2000-72432000 rwxp 00000000 00:00 0 
+72432000-72433000 ---p 00000000 00:00 0 
+72433000-724bb000 rwxp 00000000 00:00 0 
+724bb000-724d3000 rwxp 00000000 00:00 0 
+724d3000-724e8000 rwxp 00000000 00:00 0 
+724e8000-72618000 rwxp 00000000 00:00 0 
+72618000-72620000 rwxp 00000000 00:00 0 
+72620000-72638000 rwxp 00000000 00:00 0 
+72638000-7264d000 rwxp 00000000 00:00 0 
+7264d000-7277c000 rwxp 00000000 00:00 0 
+7277c000-72789000 rwxp 00000000 00:00 0 
+72789000-7281f000 rwxp 00000000 00:00 0 
+7281f000-73820000 rwxp 00000000 00:00 0 
+73820000-76820000 rwxp 00000000 00:00 0 
+76820000-790c0000 rwxp 00000000 00:00 0 
+790c0000-9f180000 rwxp 00000000 00:00 0 
+9f180000-a0940000 rwxp 00000000 00:00 0 
+a0940000-b3620000 rwxp 00000000 00:00 0 
+b3620000-b3621000 r-xs 00002000 08:05 7343519    /home/azadeh/projects/rainbowNLP/libs/slf4j-log4j12-1.6.4.jar
+b3621000-b3623000 r-xs 00004000 08:05 7343524    /home/azadeh/projects/rainbowNLP/libs/log4j-over-slf4j-1.6.4.jar
+b3623000-b362c000 rwxp 00000000 00:00 0 
+b362c000-b36e3000 rwxp 00000000 00:00 0 
+b36e3000-b3923000 rwxp 00000000 00:00 0 
+b3923000-b66e3000 rwxp 00000000 00:00 0 
+b66e3000-b66f2000 r-xp 00000000 08:05 5770222    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libzip.so
+b66f2000-b66f4000 rwxp 0000e000 08:05 5770222    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libzip.so
+b66f4000-b66fe000 r-xp 00000000 08:05 1835887    /lib/i386-linux-gnu/libnss_files-2.13.so
+b66fe000-b66ff000 r-xp 00009000 08:05 1835887    /lib/i386-linux-gnu/libnss_files-2.13.so
+b66ff000-b6700000 rwxp 0000a000 08:05 1835887    /lib/i386-linux-gnu/libnss_files-2.13.so
+b6700000-b6709000 r-xp 00000000 08:05 1835891    /lib/i386-linux-gnu/libnss_nis-2.13.so
+b6709000-b670a000 r-xp 00008000 08:05 1835891    /lib/i386-linux-gnu/libnss_nis-2.13.so
+b670a000-b670b000 rwxp 00009000 08:05 1835891    /lib/i386-linux-gnu/libnss_nis-2.13.so
+b670b000-b6711000 r-xp 00000000 08:05 1835883    /lib/i386-linux-gnu/libnss_compat-2.13.so
+b6711000-b6712000 r-xp 00005000 08:05 1835883    /lib/i386-linux-gnu/libnss_compat-2.13.so
+b6712000-b6713000 rwxp 00006000 08:05 1835883    /lib/i386-linux-gnu/libnss_compat-2.13.so
+b6713000-b6913000 r-xp 00000000 08:05 3808759    /usr/lib/locale/locale-archive
+b6913000-b694d000 r-xp 00000000 08:05 5770248    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libjdwp.so
+b694d000-b694e000 rwxp 00039000 08:05 5770248    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libjdwp.so
+b694e000-b6961000 r-xp 00000000 08:05 1835881    /lib/i386-linux-gnu/libnsl-2.13.so
+b6961000-b6962000 r-xp 00012000 08:05 1835881    /lib/i386-linux-gnu/libnsl-2.13.so
+b6962000-b6963000 rwxp 00013000 08:05 1835881    /lib/i386-linux-gnu/libnsl-2.13.so
+b6963000-b6965000 rwxp 00000000 00:00 0 
+b6965000-b696d000 r-xs 00056000 08:05 7343534    /home/azadeh/projects/rainbowNLP/libs/hibernate-envers-4.1.3.Final.jar
+b696d000-b6970000 r-xp 00000000 08:05 5770247    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libdt_socket.so
+b6970000-b6971000 rwxp 00003000 08:05 5770247    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libdt_socket.so
+b6971000-b6979000 rwxs 00000000 08:05 7343593    /tmp/hsperfdata_azadeh/14835
+b6979000-b699c000 r-xp 00000000 08:05 5770217    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libjava.so
+b699c000-b699e000 rwxp 00023000 08:05 5770217    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libjava.so
+b699e000-b69a5000 r-xp 00000000 08:05 1835910    /lib/i386-linux-gnu/librt-2.13.so
+b69a5000-b69a6000 r-xp 00006000 08:05 1835910    /lib/i386-linux-gnu/librt-2.13.so
+b69a6000-b69a7000 rwxp 00007000 08:05 1835910    /lib/i386-linux-gnu/librt-2.13.so
+b69a7000-b69aa000 ---p 00000000 00:00 0 
+b69aa000-b69f8000 rwxp 00000000 00:00 0 
+b69f8000-b6a1c000 r-xp 00000000 08:05 1835878    /lib/i386-linux-gnu/libm-2.13.so
+b6a1c000-b6a1d000 r-xp 00023000 08:05 1835878    /lib/i386-linux-gnu/libm-2.13.so
+b6a1d000-b6a1e000 rwxp 00024000 08:05 1835878    /lib/i386-linux-gnu/libm-2.13.so
+b6a1e000-b71d0000 r-xp 00000000 08:05 6297778    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/server/libjvm.so
+b71d0000-b7224000 rwxp 007b1000 08:05 6297778    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/server/libjvm.so
+b7224000-b7643000 rwxp 00000000 00:00 0 
+b7643000-b779d000 r-xp 00000000 08:05 1835841    /lib/i386-linux-gnu/libc-2.13.so
+b779d000-b779e000 ---p 0015a000 08:05 1835841    /lib/i386-linux-gnu/libc-2.13.so
+b779e000-b77a0000 r-xp 0015a000 08:05 1835841    /lib/i386-linux-gnu/libc-2.13.so
+b77a0000-b77a1000 rwxp 0015c000 08:05 1835841    /lib/i386-linux-gnu/libc-2.13.so
+b77a1000-b77a4000 rwxp 00000000 00:00 0 
+b77a4000-b77a6000 r-xp 00000000 08:05 1835851    /lib/i386-linux-gnu/libdl-2.13.so
+b77a6000-b77a7000 r-xp 00001000 08:05 1835851    /lib/i386-linux-gnu/libdl-2.13.so
+b77a7000-b77a8000 rwxp 00002000 08:05 1835851    /lib/i386-linux-gnu/libdl-2.13.so
+b77a8000-b77af000 r-xp 00000000 08:05 5908336    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/jli/libjli.so
+b77af000-b77b1000 rwxp 00006000 08:05 5908336    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/jli/libjli.so
+b77b1000-b77b2000 rwxp 00000000 00:00 0 
+b77b2000-b77c7000 r-xp 00000000 08:05 1835906    /lib/i386-linux-gnu/libpthread-2.13.so
+b77c7000-b77c8000 r-xp 00015000 08:05 1835906    /lib/i386-linux-gnu/libpthread-2.13.so
+b77c8000-b77c9000 rwxp 00016000 08:05 1835906    /lib/i386-linux-gnu/libpthread-2.13.so
+b77c9000-b77cb000 rwxp 00000000 00:00 0 
+b77cb000-b77cc000 r-xs 00002000 08:05 7343530    /home/azadeh/projects/rainbowNLP/libs/jboss-transaction-api_1.1_spec-1.0.0.Final.jar
+b77cc000-b77cd000 r-xp 002a1000 08:05 3808759    /usr/lib/locale/locale-archive
+b77cd000-b77d0000 r-xp 00000000 08:05 5770216    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libnpt.so
+b77d0000-b77d1000 rwxp 00002000 08:05 5770216    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libnpt.so
+b77d1000-b77d2000 rwxp 00000000 00:00 0 
+b77d2000-b77d3000 r-xp 00000000 00:00 0 
+b77d3000-b77de000 r-xp 00000000 08:05 5770239    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libverify.so
+b77de000-b77df000 rwxp 0000b000 08:05 5770239    /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/libverify.so
+b77df000-b77e1000 rwxp 00000000 00:00 0 
+b77e1000-b77e2000 r-xp 00000000 00:00 0          [vdso]
+b77e2000-b77fe000 r-xp 00000000 08:05 1835828    /lib/i386-linux-gnu/ld-2.13.so
+b77fe000-b77ff000 r-xp 0001b000 08:05 1835828    /lib/i386-linux-gnu/ld-2.13.so
+b77ff000-b7800000 rwxp 0001c000 08:05 1835828    /lib/i386-linux-gnu/ld-2.13.so
+bfdb1000-bfdd2000 rwxp 00000000 00:00 0          [stack]
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:43229 -Dfile.encoding=UTF-8 
+java_command: rainbownlp.i2b2.sharedtask2012.SecTimeEventClassifier
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+USERNAME=azadeh
+LD_LIBRARY_PATH=/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/../lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386/client:/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386:/usr/lib/xulrunner-addons:/usr/lib/xulrunner-addons
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x725510], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x725510], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x5dff20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x5dff20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x5dff20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x5dff20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x5e3160], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x5e2d40], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: [libjvm.so+0x5e2d40], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x5e2d40], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x5e2d40], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:squeeze/sid
+
+uname:Linux 2.6.38-11-generic-pae #48-Ubuntu SMP Fri Jul 29 20:51:21 UTC 2011 i686
+libc:glibc 2.13 NPTL 2.13 
+rlimit: STACK 8192k, CORE 0k, NPROC infinity, NOFILE 4096, AS infinity
+load average:0.15 0.10 0.13
+
+/proc/meminfo:
+MemTotal:        3988952 kB
+MemFree:          561292 kB
+Buffers:          156328 kB
+Cached:           574312 kB
+SwapCached:        10628 kB
+Active:          1924408 kB
+Inactive:        1015468 kB
+Active(anon):    1586412 kB
+Inactive(anon):   666828 kB
+Active(file):     337996 kB
+Inactive(file):   348640 kB
+Unevictable:          16 kB
+Mlocked:              16 kB
+HighTotal:       3147780 kB
+HighFree:         348212 kB
+LowTotal:         841172 kB
+LowFree:          213080 kB
+SwapTotal:       4059132 kB
+SwapFree:        3934708 kB
+Dirty:               168 kB
+Writeback:             0 kB
+AnonPages:       2200632 kB
+Mapped:           156112 kB
+Shmem:             43976 kB
+Slab:              89108 kB
+SReclaimable:      66752 kB
+SUnreclaim:        22356 kB
+KernelStack:        4736 kB
+PageTables:        21952 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6053608 kB
+Committed_AS:    6355780 kB
+VmallocTotal:     122880 kB
+VmallocUsed:       71564 kB
+VmallocChunk:      14308 kB
+HardwareCorrupted:     0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      126968 kB
+DirectMap2M:      786432 kB
+
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 23 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 23
+model name	: Intel(R) Core(TM)2 Duo CPU     E8500  @ 3.16GHz
+stepping	: 10
+cpu MHz		: 3158.437
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 xsave lahf_lm dts tpr_shadow vnmi flexpriority
+bogomips	: 6316.87
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 23
+model name	: Intel(R) Core(TM)2 Duo CPU     E8500  @ 3.16GHz
+stepping	: 10
+cpu MHz		: 3158.437
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 xsave lahf_lm dts tpr_shadow vnmi flexpriority
+bogomips	: 6317.46
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 3988952k(561292k free), swap 4059132k(3934708k free)
+
+vm_info: Java HotSpot(TM) Server VM (20.1-b02) for linux-x86 JRE (1.6.0_26-b03), built on May  4 2011 01:04:10 by "java_re" with gcc 3.2.1-7a (J2SE release)
+
+time: Wed Jul 18 10:46:52 2012
+elapsed time: 142 seconds
+
