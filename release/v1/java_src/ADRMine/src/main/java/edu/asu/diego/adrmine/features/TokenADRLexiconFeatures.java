@@ -26,8 +26,7 @@ import rainbownlp.core.PhraseLink;
 import rainbownlp.core.FeatureValuePair.FeatureName;
 import rainbownlp.core.SentenceChunk;
 import rainbownlp.core.Setting;
-import rainbownlp.i2b2.sharedtask2012.ClinicalEvent;
-import rainbownlp.i2b2.sharedtask2012.TimexPhrase;
+
 import rainbownlp.machineLearning.IFeatureCalculator;
 import rainbownlp.machineLearning.MLExample;
 import rainbownlp.machineLearning.MLExampleFeature;

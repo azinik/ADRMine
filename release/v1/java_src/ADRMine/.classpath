@@ -22,6 +22,7 @@
 	<classpathentry kind="lib" path="libs/lucene-spellchecker-3.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="libs/stanford-parser.jar"/>
+	<classpathentry kind="lib" path="libs/commons-cli-1.4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/rnlp"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -70,7 +70,7 @@ public class ConceptextractionOutPutManager {
 		
 		}
 		//String resultFileTemp =  File.createTempFile("ADRMineOutput_", ".tsv").getPath();
-		String resultFile = System.getProperty("user.dir")+"/ADRMineExtractedEntities.tsv";
+		String resultFile = System.getProperty("user.dir")+"/ExtractedEntities.tsv";
 		FileUtil.createFile(resultFile, output_extracted_ann_format_lines);
 		System.out.println("Extracted mentions are saved in: "+resultFile);
 	}

@@ -273,135 +273,7 @@ public class MainConceptExtractionEvaluation {
 	}
 	
 	return eval;
-
-
 }
-////	###########################
-//	public static Evaluation evaluateConcetpExtraction
-//				(Artifact sent, List<Phrase> expectedPhrases, List<Phrase> extractedPhrases,ArrayList<String> tps,
-//						ArrayList<String> fps,ArrayList<String> fns,Evaluation eval) throws UnsupportedEncodingException, FileNotFoundException
-//	{
-//		List<String> expectedPhraseCont = new ArrayList<>();
-//		
-//		List<String> extractedPhraseCont= new ArrayList<>();
-//		for (Phrase p:expectedPhrases)
-//		{
-//			expectedPhraseCont.add(p.getPhraseContent());
-//		}
-//		HashMap<String, Phrase> extracted_phraseMap = new HashMap<>();
-//		
-//		Integer i=0;
-//		for (Phrase p:extractedPhrases)
-//		{
-//			extractedPhraseCont.add(p.getPhraseContent());
-//			extracted_phraseMap.put(p.getPhraseContent()+"##"+i.toString(), p);
-//			i++;
-//		}
-//		
-//		
-//		ArrayList<String> temp_found_adrs = new ArrayList<>();
-//		
-//		for (Phrase p:extractedPhrases)
-//		{
-//			temp_found_adrs.add(p.getPhraseContent());
-//		}
-//		List<String> tokenizedExpected = new ArrayList<>();
-//		//since we parsed the tweets after annotattion, correctly  extracted can be considered FP
-//		if (tokenizeExpectedADRs)
-//		{
-//			for (String expected: expectedPhraseCont)
-//			{
-//				tokenizedExpected.add(parser.getTokenizedSentence(expected));
-//			}
-//			
-//		}
-//		if (tokenizedExpected.isEmpty())
-//		{
-//			tokenizedExpected.addAll(expectedPhraseCont);
-//		}
-//		List<String> partially_accepted_found_ADRs = new ArrayList<>();
-//		//since we parsed the tweets after annotattion, correctly  extracted can be considered FP
-//
-//		for (String expected:tokenizedExpected)
-////		for (Phrase expectedPhrase:expectedPhrases)
-////		for (Phrase expectedPhrase:expectedPhrases)
-//		{
-//			boolean expedted_found = false;
-//			
-////			String expected= parser.getTokenizedSentence(expectedPhrase.getPhraseContent());
-////			if (expected==null) expected=expectedPhrase.getPhraseContent();
-//			
-//			Integer j=0;
-//			for (String extracted:extractedPhraseCont)
-////			for (Phrase extractedPhrase:extractedPhrases)
-//			{
-////				String extracted = extractedPhrase.getPhraseContent();
-//				String expected_clean = StringUtil.cleanString(expected);
-//				String extracted_clean = StringUtil.cleanString(extracted);
-//				if (expected_clean.matches(".*"+extracted_clean+".*")
-//						|| extracted_clean.matches(".*"+expected_clean+".*"))
-//				{
-//					//Add the span validation here
-////					if (!arePhraseSpansOverlapping(expectedPhrase,extractedPhrase))
-////					{
-////						continue;
-////					}
-//					if(!expedted_found)
-//					{
-//						eval.addTP();
-//						tps.add(sent.getArtifactId()+" expected:"+expected +"====> extracted: "+extracted);
-//						temp_found_adrs.remove(extracted);
-//						expedted_found =true;
-//						if (MainHybridADRConceptClassifier.isFoundByCRFExclusively(extracted,sent))
-//						{
-//							CRFCount++;
-//							
-//							FileUtil.appendLine("/tmp/justCRFTP",CRFCount+" "+ sent.getArtifactId()+" "+ sent.getContent());
-//							FileUtil.appendLine("/tmp/justCRFTP", extracted);
-//						}
-//						else
-//						{
-//							FileUtil.appendLine("/tmp/SVMCRFTP", sent.getArtifactId()+" "+ sent.getContent());
-//							FileUtil.appendLine("/tmp/SVMCRFTP", extracted);
-//						}
-//					}
-//					else
-//					{
-//						temp_found_adrs.remove(extracted);
-//						partially_accepted_found_ADRs.add(sent.getArtifactId()+" "+sent.getContent()+
-//								" extracted:"+extracted+" expected:"+expected);
-//					}
-//				
-//					//this is commented to fix the problem in ignoring cases like numbed me inside and out
-//					break;
-//				}
-//				j++;
-//			}
-//
-//			if (!expedted_found)
-//			{
-//				eval.addFN();
-//				countFN++;
-////////				fns.add(sent.getAssociatedFilePath()+"$$$$ "+expected);
-////				fns.add(countFN+": "+ expectedPhrase.getPhraseContent());
-//			}
-//		}
-//
-//		//up to here the tps are removed from the list and the rest are false positives
-//		for (String found:temp_found_adrs )
-////		for (String found:temp_found_adrs )
-//		{
-//			countFP++;
-//////			fps.add(sent.getAssociatedFilePath()+"$$$$  "+found);
-//			fps.add(countFP+": "+found);
-//			
-//			eval.addFP();
-//		}
-//		FileUtil.createFile("/tmp/partialFoundExtractionEval.txt", partially_accepted_found_ADRs);
-//		return eval;
-//
-//
-//	}
 	public static boolean arePhraseSpansOverlapping(Phrase expectedPhrase,Phrase extractedPhrase)
 	{
 		boolean are_overlapping = false;
@@ -633,53 +505,18 @@ public class MainConceptExtractionEvaluation {
 			{
 				for (Phrase p:annotations)
 				{
-					if(alreadyAdded.contains(p.getStartArtifact()) || alreadyAdded.contains(p.getEndArtifact()))
-					{
-						continue;
-					}
+//					if(alreadyAdded.contains(p.getStartArtifact()) || alreadyAdded.contains(p.getEndArtifact()))
+//					{
+//						continue;
+//					}
 					if (p.getPhraseEntityType().equals("ADR")
 							|| p.getPhraseEntityType().toLowerCase().startsWith("int")
 							)
 					{
-						//for now we try to aaccept two word after and two word before
 						String next ="";
-//						Artifact nextArtifact = p.getEndArtifact().getNextArtifact();
-//						if (nextArtifact != null)
-//						{
-//							next = nextArtifact.getContent();
-////							Artifact secondNext =nextArtifact.getNextArtifact();
-////							if (secondNext != null)
-////							{
-////								next+=" "+secondNext.getContent();
-////							}
-//						}
-						
-//						String prev ="";
-//						Artifact prevArtifact = p.getStartArtifact().getPreviousArtifact();
-//						if (prevArtifact != null)
-//						{
-//							if (prevArtifact.getContent().matches("\\w+"))
-//							{
-//								prev = prevArtifact.getContent();
-//							}
-//							
-////							Artifact secondPrev =prevArtifact.getPreviousArtifact();
-////							
-////							if (secondPrev != null)
-////							{
-////								prev = secondPrev.getContent()+" "+prev;
-////							}
-//						}
-//						acceptedStringForApproximateMatch = prev+" " +acceptedStringForApproximateMatch+" "+next;
+
 						expected.add(p);
-						
-//						Artifact cur = p.getStartArtifact();
-//						while (!cur.equals(p.getEndArtifact()))
-//						{
-//							alreadyAdded.add(cur);
-//							cur = cur.getNextArtifact();
-//						}
-//						alreadyAdded.add(p.getEndArtifact());
+
 					}
 				}
 			}

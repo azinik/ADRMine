@@ -65,7 +65,8 @@ public class CRFSuite implements ILearnerEngine {
 		
 		
 		String c1="0.5";
-		if (conn.getMetaData().getURL().toLowerCase().matches(".*twitter.*$"))
+//		if (conn.getMetaData().getURL().toLowerCase().matches(".*twitter.*$"))
+		if (corpusName.matches(".*twitter.*$"))
 		{
 			c1="0.3";
 		}
@@ -79,9 +80,10 @@ public class CRFSuite implements ILearnerEngine {
 				+ " -a lbfgs -p c1="+c1+" -p c2=0  -p feature.possible_states=1 -p feature.possible_transitions=1 "
 				+ "-p max_iterations=200  -p epsilon=1e-3 " +trainFile;
 				
+		
+		SystemUtil.runShellCommand(myShellScript);
 		System.out.println("CRFSuite Command: "+myShellScript);
 		System.out.println("the trained model is saved in "+getModelFile());
-		SystemUtil.runShellCommand(myShellScript);
 
 	}
 	

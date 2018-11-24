@@ -45,19 +45,19 @@ public class ADRMineEvaluation {
 				MLExample.getAllExamples(corpusName, false);
 		if (goldStandardAnnotations!=null){
 //			//updating expectedClass in db
-//			updateExpectedClass(goldStandardAnnotations,corpusName,TargetSemanticType.ADR.toString());
+			updateExpectedClass(goldStandardAnnotations,corpusName,TargetSemanticType.ADR.toString());
 			
 			//update the expectedClass field in the MLExample based on the gold standard annotations
 			updateExpectedPhrases(goldStandardAnnotations,corpusName,TargetSemanticType.ADR,testExamples);
 		}
 
 
-		if (testExamples.isEmpty() || testExamples==null){
-			throw new Exception("test classification examples are not loaded ...");
-		}
-		MainConceptExtractionEvaluation ev = new MainConceptExtractionEvaluation();
-		ev.evaluateExtractedPhrases(testExamples,MainConceptExtractionEvaluation.ExtractionMethod.CRF,
-				TargetSemanticType.ADR.toString(),false,corpusName);
+//		if (testExamples.isEmpty() || testExamples==null){
+//			throw new Exception("test classification examples are not loaded ...");
+//		}
+//		MainConceptExtractionEvaluation ev = new MainConceptExtractionEvaluation();
+//		ev.evaluateExtractedPhrases(testExamples,MainConceptExtractionEvaluation.ExtractionMethod.CRF,
+//				TargetSemanticType.ADR.toString(),false,corpusName);
 
 		
 	}
@@ -75,21 +75,45 @@ public class ADRMineEvaluation {
 			String content = elements[4];
 			int startIndex = Integer.parseInt(elements[1]);
 			int endIndex = Integer.parseInt(elements[2]);
-			String type = elements[3];
-			if (!semanticType.equals(type)){
+			String type = elements[3].toLowerCase();
+			//TODO: make this configurable 
+			if (!(type.equals("adr")
+					||type.equals("indication")
+					||type.equals("beneficial")
+					||type.equals("interaction"))){
 				continue;
+			}
+			int begin_label = 0;
+			int inside_label=0;
+			if (type.equals("adr") || type.equals("interaction")){
+				begin_label=TokenLabel.BADR.ordinal();
+				inside_label = TokenLabel.IADR.ordinal();
+			}else if (type.equals("indication") || type.equals("beneficial")){
+				begin_label=TokenLabel.BIND.ordinal();
+				inside_label = TokenLabel.IIND.ordinal();
 			}
 			String tokenized_content = parser.getTokenizedSentence(content);
 			String[] tokens = tokenized_content.split(" ");
 			String startToken = tokens[0].replaceAll("\\.$", "");
-			Artifact startArtifact = Artifact.findInstanceByContentEnd(Artifact.Type.Word, associatedID,startToken );
+			
+			Artifact startArtifact=null;
+			//special handling
+			if (associatedID.equals("humira-51d20e3e53785f584a9af2dd"))
+			{
+				startArtifact = Artifact.findInstanceByExactContent(Artifact.Type.Word, associatedID,startToken );
+			}else{
+				 startArtifact = Artifact.findInstanceByContent(Artifact.Type.Word, associatedID,startToken );
+			}
 			if (startArtifact ==null)
 			{
-				System.out.println("Artifact not found");
+				throw new Exception("start token for the annotated phrase not found");
 			}
 			MLExample example = MLExample.findInstanceForArtifact(startArtifact, corpusName);
-			
-			String saveExpectedQuery = "update MLExample set expectedClass ="+TokenLabel.BADR.ordinal()+" where exampleId="+example.getExampleId();
+			if (example ==null)
+			{
+				throw new Exception("the classification candidate for not found"+startArtifact.getArtifactId());
+			}
+			String saveExpectedQuery = "update MLExample set expectedClass ="+begin_label+" where exampleId="+example.getExampleId();
 			
 			HibernateUtil.executeNonReader(saveExpectedQuery);
 		
@@ -99,7 +123,7 @@ public class ADRMineEvaluation {
 				if (next != null){
 					example = MLExample.findInstanceForArtifact(next, corpusName);
 					
-					saveExpectedQuery = "update MLExample set expectedClass ="+TokenLabel.IADR.ordinal()+" where exampleId="+example.getExampleId();
+					saveExpectedQuery = "update MLExample set expectedClass ="+inside_label+" where exampleId="+example.getExampleId();
 					
 					HibernateUtil.executeNonReader(saveExpectedQuery);
 				}
@@ -131,28 +155,46 @@ public class ADRMineEvaluation {
 			String associatedID = elements[0];
 
 			String content = elements[4];
-
-			String type = elements[3];
-			if (!semanticType.equals(type)){
+			String type = elements[3].toLowerCase();
+			//TODO: make this configurable 
+			if (!(type.equals("adr")
+					||type.equals("indication")
+					||type.equals("beneficial")
+					||type.equals("interaction"))){
 				continue;
 			}
-			if (semanticType.equals("ADR")){
-				//entity types of "ADR" and interactions are considered ADR
-				if (!(type.equals("ADR") || type.startsWith("int"))){
-						continue;
-					}
+			int begin_label = 0;
+			int inside_label=0;
+			String phraseEntityType=TargetSemanticType.ADR.toString();
+			if (type.equals("adr") || type.equals("interaction")){
+				begin_label=TokenLabel.BADR.ordinal();
+				inside_label = TokenLabel.IADR.ordinal();
+			}else if (type.equals("indication") || type.equals("beneficial")){
+				begin_label=TokenLabel.BIND.ordinal();
+				inside_label = TokenLabel.IIND.ordinal();
+				phraseEntityType = TargetSemanticType.Indication.toString();
 			}
+			
 			String tokenized_content = parser.getTokenizedSentence(content);
 			String[] tokens = tokenized_content.split(" ");
 			String startToken = tokens[0].replaceAll("\\.$", "");
-			Artifact startArtifact = Artifact.findInstanceByContentEnd(Artifact.Type.Word, associatedID,startToken );
+	
+			Artifact startArtifact=null;
+			//special handling TODO: 
+			if (associatedID.equals("humira-51d20e3e53785f584a9af2dd"))
+			{
+				startArtifact = Artifact.findInstanceByExactContent(Artifact.Type.Word, associatedID,startToken );
+			}else{
+				 startArtifact = Artifact.findInstanceByContent(Artifact.Type.Word, associatedID,startToken );
+			}
+			
 			if (startArtifact ==null)
 			{
 				throw new Exception("Artifact not found");
 			}
 			MLExample example = MLExample.findInstanceForArtifact(startArtifact, corpusName);
 			
-			String saveExpectedQuery = "update MLExample set expectedClass ="+TokenLabel.BADR.ordinal()+" where exampleId="+example.getExampleId();
+			String saveExpectedQuery = "update MLExample set expectedClass ="+begin_label+" where exampleId="+example.getExampleId();
 			
 			HibernateUtil.executeNonReader(saveExpectedQuery);
 		
@@ -164,6 +206,11 @@ public class ADRMineEvaluation {
 			while(token_count<tokens.length){
 				next = next.getNextArtifact();
 				if (next != null){
+					example = MLExample.findInstanceForArtifact(next, corpusName);
+					
+					saveExpectedQuery = "update MLExample set expectedClass ="+inside_label+" where exampleId="+example.getExampleId();
+					
+					HibernateUtil.executeNonReader(saveExpectedQuery);
 					phrase_content+=" "+next.getContent();
 					endArtifact = next;
 				}
@@ -173,7 +220,7 @@ public class ADRMineEvaluation {
 				token_count++;
 			}
 	
-			Phrase.getInstance(phrase_content, startArtifact, endArtifact, targetSemanticType.toString());
+			Phrase.getInstance(phrase_content, startArtifact, endArtifact, phraseEntityType);
 		}
 		
 	}

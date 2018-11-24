@@ -719,20 +719,36 @@ public class Artifact {
 	}
 	public static Artifact findInstanceByContentEnd(Type pArtifactType, String pFilePath, 
 			String pContent ){
-		System.out.println(pFilePath+" "+pContent);
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		String hql = "from Artifact where artifactType =:artifactType  and" +
 				" associatedFilePath like :associatedFilePath and content like:content ";
 		
-		
 		params.put("associatedFilePath", '%'+pFilePath+'%');
-		params.put("content", '%'+pContent+'%');
+		params.put("content", '%'+pContent);
 		params.put("artifactType", pArtifactType.ordinal());
 		
 		List<Artifact> artifact_objects = 
 				(List<Artifact>) HibernateUtil.executeReader(hql,params);
-	    
-	    System.out.println(hql);
+	    Artifact artifact_obj=null;
+	    if(artifact_objects.size()!=0)
+	    {
+	    	artifact_obj = 
+				artifact_objects.get(0);
+	    }
+	    return artifact_obj;
+	}
+	public static Artifact findInstanceByExactContent(Type pArtifactType, String pFilePath, 
+			String pContent ){
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		String hql = "from Artifact where artifactType =:artifactType  and" +
+				" associatedFilePath like :associatedFilePath and content like:content ";
+		
+		params.put("associatedFilePath", '%'+pFilePath+'%');
+		params.put("content", pContent);
+		params.put("artifactType", pArtifactType.ordinal());
+		
+		List<Artifact> artifact_objects = 
+				(List<Artifact>) HibernateUtil.executeReader(hql,params);
 	    Artifact artifact_obj=null;
 	    if(artifact_objects.size()!=0)
 	    {
