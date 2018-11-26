@@ -70,7 +70,7 @@ public class TokenClauseFeatures implements IFeatureCalculator {
 		//get related artifact
 		Artifact relatedArtifact = exampleToProcess.getRelatedArtifact();
 		
-		boolean is_negated_expanded = Negation.isWordNegatedExpanded(relatedArtifact, relatedArtifact.getParentArtifact());
+//		boolean is_negated_expanded = Negation.isWordNegatedExpanded(relatedArtifact, relatedArtifact.getParentArtifact());
 		boolean is_negated = Negation.isWordNegated(relatedArtifact, relatedArtifact.getParentArtifact());
 		
 		

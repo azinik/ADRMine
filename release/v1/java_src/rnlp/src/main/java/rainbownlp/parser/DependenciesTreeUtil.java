@@ -6,7 +6,6 @@ import org.jgrapht.UndirectedGraph;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleGraph;
 
-import rainbownlp.analyzer.sentenceclause.SentenceClauseManager;
 import rainbownlp.core.Artifact;
 import rainbownlp.core.graph.GraphEdge;
 
@@ -19,16 +18,6 @@ public class DependenciesTreeUtil {
             new SimpleGraph<String, GraphEdge>(GraphEdge.class);
 	
 	List<DependencyLine> dependencies;
-	SentenceClauseManager clauseManager;
-	public DependenciesTreeUtil(Artifact pSentence) throws Exception
-	{
-		sentenceArtifact = pSentence;
-		clauseManager =
-				new SentenceClauseManager(sentenceArtifact);
-		dependencies = clauseManager.sentDepLines;
-		makeTrees();
-	}
-	
 
 
 

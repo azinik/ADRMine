@@ -43,8 +43,8 @@ java_import(
             "libs/stanford-parser.jar",
             "libs/stanford-postagger.jar",
             "libs/stringtotime-1.0.4.jar",
-            "libs/weka.jar",
-            ]),
+            "libs/weka.jar"
+            ])
  
 filegroup(
     name = "exported_data",

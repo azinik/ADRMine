@@ -2,8 +2,8 @@
 java_binary(
     name = "adrmine",
     srcs = glob(["**/*.java","**/*.properties"]),
-    deps = ["//rnlp-stb:rnlp", "//rnlp-stb:rnlp_jars", "adrmine_jars"],
-    main_class = "edu.asu.diego.adrmine.ner.mainADRMinePipelineForExtraction",
+    deps = ["//rnlp:rnlp", "//rnlp:rnlp_jars", "adrmine_jars"],
+    main_class = "edu.asu.diego.adrmine.ner.MainADRMine",
     resources = [
         "src/resources/DSOct314-classes-sorted.txt",
         "src/resources/TwitterOct0514-classes-sorted.txt",
@@ -20,5 +20,6 @@ java_import(
             "libs/lucene-core-3.6.2.jar",
             "libs/lucene-spellchecker-3.6.1.jar",
             "libs/commons-io-2.5.jar",
+            "libs/commons-cli-1.4.jar",
             ],
     )

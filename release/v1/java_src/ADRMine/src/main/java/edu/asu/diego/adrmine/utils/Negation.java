@@ -2,15 +2,9 @@ package edu.asu.diego.adrmine.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import rainbownlp.analyzer.sentenceclause.Clause;
-import rainbownlp.analyzer.sentenceclause.SentenceClauseManager;
 import rainbownlp.core.Artifact;
-import rainbownlp.core.Phrase;
 import rainbownlp.parser.DependencyLine;
-import rainbownlp.util.HibernateUtil;
 import rainbownlp.util.StanfordDependencyUtil;
-import rainbownlp.util.StringUtil;
 
 
 public class Negation {
@@ -94,22 +88,7 @@ public class Negation {
 
 		return is_negated;
 	}
-	public static boolean isWordNegatedExpanded(Artifact word,Artifact sent) throws Exception
-	{
-		boolean is_negated= false;
-		is_negated = isWordNegated( word,sent);
-		// Check the governor verb 
-		if (!is_negated)
-		{
-			SentenceClauseManager clauseManager =
-				new SentenceClauseManager(sent);
-			Artifact gov_verb = getGovernorVerb(word,clauseManager);
-			if (gov_verb != null &&
-					isWordNegated(gov_verb, sent))
-				is_negated = true;
-		}
-		return is_negated;
-	}
+
 	public static ArrayList<String>  getNPrevTokens(int word_index,Artifact sent,int howMany)
 	{
 		ArrayList<String> prev_tokens = new ArrayList<String>(); 
@@ -122,42 +101,6 @@ public class Negation {
 			prev=prev.getPreviousArtifact();
 		}
 		return prev_tokens;
-	}
-	public static Artifact getGovernorVerb
-			(Artifact pWord, SentenceClauseManager pClauseManager ) throws Exception
-	{
-		String gov_verb = null;
-	
-		// get sentence clauses
-		Artifact head = pWord;
-		SentenceClauseManager clauseManager=pClauseManager;
-		
-		Clause related_clause = clauseManager.clauseMap.get(head.getWordIndex()+1);
-		Artifact gov_verb_artifact = null;
-		if (related_clause!=null)
-		{
-			gov_verb = related_clause.clauseVerb.verbMainPart;
-			gov_verb_artifact = 
-				Artifact.findInstance(clauseManager.getRelatedSentence(), 
-						related_clause.clauseVerb.offset-1);
-
-			if (!gov_verb.matches(""))
-			{
-				if (!gov_verb_artifact.getPOS().startsWith("VB"))
-				{
-					gov_verb = null;
-				}
-			}
-			
-			
-		}
-		if (gov_verb ==null || gov_verb.equals("") )
-		{
-			gov_verb_artifact= calclateGovVerb(pWord);
-		}
-	
-		
-		return gov_verb_artifact;
 	}
 	public static Artifact calclateGovVerb(Artifact pWord) {
 		Artifact gov_verb = null;

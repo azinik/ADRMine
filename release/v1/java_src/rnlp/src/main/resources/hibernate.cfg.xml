@@ -32,29 +32,9 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-<!--         <property name="connection.url">jdbc:mysql://localhost/adrmine</property> -->
+        <property name="connection.url">jdbc:mysql://localhost/ADRMineDB</property>
 <!--  		<property name="connection.url">jdbc:mysql://localhost/deext</property> -->
-        <property name="connection.url">jdbc:mysql://localhost/deextTwitter</property>
-<!--         <property name="connection.url">jdbc:mysql://localhost/off-label-deext</property> -->
-<!--          <property name="connection.url">jdbc:mysql://localhost/off-label-deext-seroquel</property> -->
-<!--          <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment</property> -->
-<!--           <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment-twitter</property> -->
-<!--                    <property name="connection.url">jdbc:mysql://localhost/amia-2015-sentiment-TwitterMain</property> -->
-          
-<!--         <property name="connection.url">jdbc:mysql://localhost/offLabelCrossCorpus</property> -->
-<!-- 		<property name="connection.url">jdbc:mysql://localhost/healthRelated</property>  -->
-<!-- 		<property name="connection.url">jdbc:mysql://localhost/offLabelDSSeroquel</property> -->
-<!-- 		 <property name="connection.url">jdbc:mysql://localhost/offLabelDSEffexor</property> -->
-<!-- 					   <property name="connection.url">jdbc:mysql://localhost/offLabelDSCymbalta</property> -->
-<!-- 			   <property name="connection.url">jdbc:mysql://localhost/offLabelDSTrazodone</property> -->
-<!--  			<property name="connection.url">jdbc:mysql://localhost/deextTwitterRNNExperiments</property> -->
-<!-- 				<property name="connection.url">jdbc:mysql://localhost/deextLessTrainDataSignSymp</property> -->
-<!--       <property name="connection.url">jdbc:mysql://localhost/deextTwitterHumira</property>  -->
-<!-- <property name="connection.url">jdbc:mysql://localhost/PSB-Twitter</property> -->
-<!-- <property name="connection.url">jdbc:mysql://localhost/DrSmithPaperAug2016</property>  -->
-<!-- <property name="connection.url">jdbc:mysql://localhost/ADRMineDB</property> -->
-<!--               <property name="connection.url">jdbc:mysql://localhost/ADRMineAllTweets</property> -->
-
+ <!--        <property name="connection.url">jdbc:mysql://localhost/deextTwitter</property>-->
         <property name="connection.username">user</property>
         <property name="connection.password">pass</property>
 
@@ -80,7 +60,7 @@
         <mapping class="rainbownlp.core.Artifact"/>
 		<mapping class="rainbownlp.core.PhraseLink"/>
 		<mapping class="rainbownlp.core.Phrase"/>
-		<mapping class="rainbownlp.core.SentenceChunk"/>
+<!-- 		<mapping class="rainbownlp.core.SentenceChunk"/>-->
 		
 <!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.ClinicalEvent"/> -->
 <!-- 		<mapping class="rainbownlp.i2b2.sharedtask2012.TimexPhrase"/> -->

@@ -7,8 +7,6 @@ import java.util.List;
 
 import LuceneManagerADR.ADRLuceneSearcher;
 import LuceneManagerADR.DidYouMeanIndexer;
-import rainbownlp.analyzer.sentenceclause.Clause;
-import rainbownlp.analyzer.sentenceclause.SentenceClauseManager;
 import rainbownlp.core.Artifact;
 import rainbownlp.core.FeatureValuePair;
 
@@ -312,57 +310,6 @@ public class TokenBasicFeatures implements IFeatureCalculator {
 		HibernateUtil.clearLoaderSession();		
 	}
 
-	public static String getGovernorVerb(Artifact token ) throws Exception
-	{
-		String gov_verb = null;
-	
-		// get sentence clauses
-		Artifact head = token;
-		SentenceClauseManager clauseManager;
-		
-		clauseManager = new SentenceClauseManager(token.getParentArtifact());
-		
-		Clause related_clause = clauseManager.clauseMap.get(head.getWordIndex()+1);
-		
-		if (related_clause!=null)
-		{
-			gov_verb = related_clause.clauseVerb.verbMainPart;
-
-			if (!gov_verb.matches(""))
-			{
-				Artifact gov_verb_artifact = 
-					Artifact.findInstance(clauseManager.getRelatedSentence(), 
-							related_clause.clauseVerb.offset-1);
-				if (!gov_verb_artifact.getPOS().startsWith("VB"))
-				{
-					gov_verb = null;
-				}
-				else
-				{
-//					pPhrase.setGovVerb(gov_verb_artifact);
-//					HibernateUtil.save(pPhrase);
-				}
-			}
-			
-			
-		}
-		if (gov_verb ==null || gov_verb.equals("") )
-		{
-			Artifact ga= calclateGovVerb(head);
-			if (ga != null)
-			{
-				gov_verb= ga.getContent();
-				
-			}
-		}
-		
-//		if (gov_verb != null)
-//		{
-//			gov_verb = StringUtil.getWordLemma(gov_verb);
-//		}
-		
-		return gov_verb;
-	}
 	public static Artifact calclateGovVerb(Artifact token) {
 		Artifact gov_verb = null;
 		String pos = token.getPOS();

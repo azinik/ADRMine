@@ -27,7 +27,6 @@ import rainbownlp.core.FeatureValuePair;
 import rainbownlp.core.Phrase;
 import rainbownlp.core.PhraseLink;
 import rainbownlp.core.PhraseLink.LinkType;
-import rainbownlp.core.SentenceChunk;
 import rainbownlp.core.Setting;
 import rainbownlp.core.Artifact.Type;
 import rainbownlp.util.FileUtil;
@@ -51,8 +50,6 @@ public class MLExample {
 	private int expectedReal;
 	private int expectedClosure;
 	private int expectedIntegrated;
-	
-	private SentenceChunk relatedChunk;
 	
 	private Phrase relatedPhrase;
 	
@@ -698,31 +695,7 @@ public class MLExample {
 	public int getExpectedIntegrated() {
 		return expectedIntegrated;
 	}
-	////////
-	public static MLExample getInstanceForChunk(SentenceChunk relatedChunk,
-			String experimentgroup) {
-		String hql = "from MLExample where relatedChunk = "+
-				relatedChunk.getChunkId() + " and corpusName = '"+
-				experimentgroup+"'";
-			List<MLExample> example_objects = 
-					getExamplesList(hql);
-		    
-			MLExample example_obj;
-		    if(example_objects.size()==0)
-		    {
-		    	example_obj = new MLExample();
-		    	example_obj.setCorpusName(experimentgroup);
-		    	example_obj.setRelatedChunk(relatedChunk);
-		    	
-		    	if(Setting.SaveInGetInstance)
-			    	saveExample(example_obj);
-		    }else
-		    {
-		    	example_obj = 
-		    			example_objects.get(0);
-		    }
-		    return example_obj;
-	}
+
 	public static MLExample getInstanceForPhrase(Phrase relatedPhrase,
 			String experimentgroup) {
 		String hql = "from MLExample where relatedPhrase = "+
@@ -747,15 +720,7 @@ public class MLExample {
 		    }
 		    return example_obj;
 	}
-	@OneToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch=FetchType.LAZY )
-    @JoinColumn(name="relatedChunk")
-	public SentenceChunk getRelatedChunk() {
-		return relatedChunk;
-	}
 
-	public void setRelatedChunk(SentenceChunk relatedChunk) {
-		this.relatedChunk = relatedChunk;
-	}
 	@Transient
 	public String getRelatedDrug() {
 		return relatedDrug;

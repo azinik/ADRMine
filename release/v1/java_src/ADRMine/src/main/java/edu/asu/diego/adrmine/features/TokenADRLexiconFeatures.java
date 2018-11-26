@@ -3,34 +3,21 @@
  */
 package edu.asu.diego.adrmine.features;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.lucene.queryParser.ParseException;
-import LuceneManagerADR.ADRLuceneSearcher;
 import edu.asu.diego.adrmine.classification.TokenSequenceExampleBuilder;
 import edu.asu.diego.adrmine.utils.LexiconBasedUtils;
-import rainbownlp.analyzer.sentenceclause.Clause;
-import rainbownlp.analyzer.sentenceclause.SentenceClauseManager;
+
 import rainbownlp.core.Artifact;
 import rainbownlp.core.FeatureValuePair;
-import rainbownlp.core.Phrase;
-import rainbownlp.core.PhraseLink;
 import rainbownlp.core.FeatureValuePair.FeatureName;
-import rainbownlp.core.SentenceChunk;
-import rainbownlp.core.Setting;
 
 import rainbownlp.machineLearning.IFeatureCalculator;
 import rainbownlp.machineLearning.MLExample;
 import rainbownlp.machineLearning.MLExampleFeature;
-import rainbownlp.util.FileUtil;
 import rainbownlp.util.HibernateUtil;
 import rainbownlp.util.StringUtil;
 
