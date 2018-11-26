@@ -27,20 +27,20 @@ The jar file can be executed using the following command:
 java -jar bazel-bin/ADRMine/adrmine_deploy.jar <input OPTIONS>
 
 The current version of ADRMine includes the trained models for  ADR extraction. "MainADRMine is the main class related to training and testing ADRMine that expects different options as input arguments, below we listed the options for training and testing:
-..* train : if the -train option exists, the program is in training mode, and if the option does not exists it is in testing mode.
-..* dbName: is the name of the local schema that ADRMine connects to.
-..* dbUser: the database username
-..* dbPass: the database password
-..* docs: The path to the train/test corpus. The text file contains train or test text contents. Every line is expected to have two elements that are tab separated, a unique ID associated with the post and the post text content. 
++ train : if the -train option exists, the program is in training mode, and if the option does not exists it is in testing mode.
++ dbName: is the name of the local schema that ADRMine connects to.
++ dbUser: the database username
++ dbPass: the database password
++ docs: The path to the train/test corpus. The text file contains train or test text contents. Every line is expected to have two elements that are tab separated, a unique ID associated with the post and the post text content. 
  e.g.: vyvanse-1234	Paxil completely gets rid of my appetite. not quite sure how to feel about this.
 
-..* goldAnns (optional for testing): Is the gold standard annotations. Passing this file as an input argument is optional for testing. If the option exists, the system compares the IOB labels with the gold standard and prints performance results (precision, recall and F-score).
++ goldAnns (optional for testing): Is the gold standard annotations. Passing this file as an input argument is optional for testing. If the option exists, the system compares the IOB labels with the gold standard and prints performance results (precision, recall and F-score).
  For the posts that contain any relevant entity, there is one or more associated lines in the annotation file. For the posts that the human annotators did not tag any entity, we will not have a corresponding line in the annotation file.
  
-..* corpusName: is the name that can be defined for the experiment. Please choose a different name for each separate experiment. Please note that the system is trained on user posts in health related social networks (e.g. DailyStrength.org) and  Twitter. We trained a different model for user tweets, so if your test sentences are from twitter, include “twitter” as part of your corpus name “e.g. twitter1”.
-..* crfPath: is the path of the executable CRFSuite file in your system, after you install CRFSuite, get the path to the executable CRFSuite e.g.: /usr/local/Cellar/crfsuite/0.12/bin/crfsuite
-..* modelFile: It is an optional parameter that is used during testing. If it is not passed in then the program uses the default, previously trained, model, otherwise it uses the model given as modelFile.
-..* forTwitter: set to true if the experiment is on Twitter data and false otherwise. 
++ corpusName: is the name that can be defined for the experiment. Please choose a different name for each separate experiment. Please note that the system is trained on user posts in health related social networks (e.g. DailyStrength.org) and  Twitter. We trained a different model for user tweets, so if your test sentences are from twitter, include “twitter” as part of your corpus name “e.g. twitter1”.
++ crfPath: is the path of the executable CRFSuite file in your system, after you install CRFSuite, get the path to the executable CRFSuite e.g.: /usr/local/Cellar/crfsuite/0.12/bin/crfsuite
++ modelFile: It is an optional parameter that is used during testing. If it is not passed in then the program uses the default, previously trained, model, otherwise it uses the model given as modelFile.
++ forTwitter: set to true if the experiment is on Twitter data and false otherwise. 
  
 **Usage examples**
 
